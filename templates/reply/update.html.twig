@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification réaction{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formulaire) }}
+    {{ form_widget(formulaire.content) }}
+    <input type="submit" value="Modifier" class="btn btn-success">
+    {{ form_end(formulaire) }}
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+
+    {% if app.user%}
+
+            <h2>Créer ton message</h2>
+            {{ form_start(formulaire) }}
+
+
+            {{ form_row(formulaire.title) }}
+            {{ form_row(formulaire.content) }}
+
+            <button type="submit" class="btn btn-success">Créer</button>
+
+            {{ form_end(formulaire) }}
+
+    {% else %}
+
+        <a href="{{ path('connexion') }}" class="btn btn-success"><h2>Créer ton message</h2></a>
+
+    {% endif %}
+
+
+
+    {% for message in messages %}
+
+        <hr>
+        <p>De : {{ message.user.username }}</p>
+        <p>Titre : {{ message.title }}</p>
+        <p>{{ message.content }}</p>
+        <a href="{{ path("show_message", {id : message.id}) }}" class="btn btn-primary">Voir</a>
+        <hr>
+
+    {% endfor %}
+
+{% endblock %}

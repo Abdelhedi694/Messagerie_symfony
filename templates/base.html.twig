@@ -6,7 +6,7 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="https://bootswatch.com/5/lumen/bootstrap.min.css">
         {% endblock %}
 
         {% block javascripts %}
@@ -14,6 +14,23 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Home</a>
+
+            {% if app.user%}
+                <a href="{{ path('deconnexion') }}" class="btn btn-danger">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('inscription') }}" class="btn btn-primary">Inscription</a>
+                <a href="{{ path('connexion') }}" class="btn btn-primary">Connexion</a>
+            {% endif %}
+
+        </div>
+    </nav>
+
+
+    {% block body %}{% endblock %}
     </body>
 </html>

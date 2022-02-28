@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+
+
+
+        <hr>
+        <p>De : {{ message.user.username }}</p>
+        <p>Titre : {{ message.title }}</p>
+        <p>{{ message.content }}</p>
+
+        {% if app.user == message.user %}
+        <a href="{{ path("delete_message", {id : message.id}) }}" class="btn btn-danger">Supprimer</a>
+        <a href="{{ path("update_message", {id : message.id}) }}" class="btn btn-warning">Modifier</a>
+        {% endif %}
+        <hr>
+
+        {% if app.user%}
+                <h3>Réagir au message de {{ message.user.username }}</h3>
+
+                {{ form_start(formulaire, {action : path('new_reply', {id: message.id})}) }}
+
+                {{ form_widget(formulaire.content) }}
+                <input type="submit" value="Réagir" class="btn btn-success">
+
+                {{ form_end(formulaire) }}
+
+                <hr>
+
+        {% else %}
+                <a href="{{ path('connexion') }}" class="btn btn-success"><h3>Réagir au message de {{ message.user.username }}</h3></a>
+
+        {% endif %}
+
+
+
+<h3>Réponses :</h3>
+        {% for reply in message.replies %}
+
+                <hr>
+                        <p>De : {{ reply.user.username }}</p>
+                        <p>{{ reply.content }}</p>
+
+                {% if app.user == reply.user %}
+                        <a href="{{ path("delete_reply", {id : reply.id}) }}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path("update_reply", {id : reply.id}) }}" class="btn btn-warning">Modifier</a>
+                {% endif %}
+                <hr>
+
+        {% endfor %}
+
+{% endblock %}

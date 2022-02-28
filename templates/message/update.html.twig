@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formulaire) }}
+
+
+    {{ form_row(formulaire.title) }}
+    {{ form_row(formulaire.content) }}
+
+    <button type="submit" class="btn btn-success">Modifier</button>
+
+    {{ form_end(formulaire) }}
+
+{% endblock %}
